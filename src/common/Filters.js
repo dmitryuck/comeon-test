@@ -27,9 +27,19 @@ export const applyFilters = (filteringItems, defaultItems, filters) => {
   return filteredItems;
 };
 
-export const concatFilters = (filters, newFilter) => {};
+export const concatFilters = (filters, newFilter) => {
+  const filtersCopy = deepCopy(filters);
 
-export const resetFilters = () => {};
+  const targetFilter = filtersCopy.find((filter) => filter.filterBy === newFilter.filterBy);
+
+  if (targetFilter) {
+    targetFilter.value = newFilter.value;
+  } else {
+    filtersCopy.push(newFilter);
+  }
+
+  return filtersCopy;
+};
 
 function filterByName(items, filterBy, value) {
   let itemsFilteredByName = [];
