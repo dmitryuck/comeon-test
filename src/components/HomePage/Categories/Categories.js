@@ -34,7 +34,7 @@ export default function Categories() {
     const allFilters = concatFilters(filters, { filterBy: "categoryIds", value: categoryId });
     setFilters(allFilters);
 
-    const filteredAllGames = applyFilters(games, games, allFilters);
+    const filteredAllGames = applyFilters(games, allFilters);
     setFilteredGames(filteredAllGames);
   };
 

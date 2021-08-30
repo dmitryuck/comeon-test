@@ -5,8 +5,8 @@ export const defaultFilters = [
   { filterBy: "categoryIds", value: 0, func: filterByCategoryId },
 ];
 
-export const applyFilters = (filteringItems, defaultItems, filters) => {
-  let filteredItems = deepCopy(filteringItems);
+export const applyFilters = (items, filters) => {
+  let filteredItems = deepCopy(items);
 
   filters.forEach((filter) => {
     const targetFilter = defaultFilters.find(
@@ -18,10 +18,6 @@ export const applyFilters = (filteringItems, defaultItems, filters) => {
     }
 
     filteredItems = targetFilter.func(filteredItems, filter.filterBy, filter.value);
-
-    if (!filteredItems.length) {
-      filteredItems = deepCopy(defaultItems);
-    }
   });
 
   return filteredItems;
@@ -42,7 +38,7 @@ export const concatFilters = (filters, newFilter) => {
 };
 
 function filterByName(items, filterBy, value) {
-  let itemsFilteredByName = [];
+  let itemsFilteredByName = deepCopy(items);
 
   if (value) {
     itemsFilteredByName = items.filter((item) => item[filterBy].includes(value));

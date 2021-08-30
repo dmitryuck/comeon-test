@@ -25,6 +25,7 @@ export default function UserInfo() {
 
     if (responseData.status === "success") {
       setUser(null);
+
       localStorage.removeItem("user");
 
       history.push("/login");

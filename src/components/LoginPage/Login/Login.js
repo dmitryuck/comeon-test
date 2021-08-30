@@ -39,12 +39,12 @@ export default function Login() {
       }),
     });
 
-    const userData = await response.json();
+    const responseData = await response.json();
 
-    if (userData.status === "fail") {
-      alert(userData.error);
+    if (responseData.status === "fail") {
+      alert(responseData.error);
     } else {
-      const currentUser = { ...userData.player, username };
+      const currentUser = { ...responseData.player, username };
 
       setUser(currentUser);
 

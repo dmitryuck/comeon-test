@@ -13,7 +13,7 @@ export default function GameSearch() {
     const allFilters = concatFilters(filters, { filterBy: "name", value: e.target.value });
     setFilters(allFilters);
 
-    const filteredAllGames = applyFilters(filteredGames, games, allFilters);
+    const filteredAllGames = applyFilters(games, allFilters);
     setFilteredGames(filteredAllGames);
   };
 
