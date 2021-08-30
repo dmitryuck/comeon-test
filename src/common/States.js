@@ -1,6 +1,11 @@
 import { atom } from "recoil";
 import { defaultFilters } from "./Filters";
 
+export const userState = atom({
+  key: "userState",
+  default: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
+});
+
 export const gamesState = atom({
   key: "gamesState",
   default: [],
