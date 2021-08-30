@@ -1,0 +1,10 @@
+.game-item-container {
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 20px 0;
+
+  .image-container {
+    max-width: 140px;
+    max-height: 160px;
+    margin-right: 20px;
+  }
+}

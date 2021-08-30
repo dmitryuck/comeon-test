@@ -1,0 +1,12 @@
+a {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+a:hover {
+  color: black !important;
+}
+
+a.selected {
+  color: black;
+}
