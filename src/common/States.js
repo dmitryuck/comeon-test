@@ -1,9 +1,10 @@
 import { atom } from "recoil";
 import { defaultFilters } from "./Filters";
+import { readUserFromStorage } from "./Api";
 
 export const userState = atom({
   key: "userState",
-  default: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
+  default: readUserFromStorage(),
 });
 
 export const gamesState = atom({

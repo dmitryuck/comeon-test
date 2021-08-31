@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { Container } from "semantic-ui-react";
 import GameItem from "./GameItem/GameItem";
 import { gamesState, filteredGamesState, selectedCategoryIdState } from "../../../common/States";
+import { fetchGames } from "../../../common/Api";
 
 export default function GamesList() {
   const [games, setGames] = useRecoilState(gamesState);
@@ -10,11 +11,7 @@ export default function GamesList() {
   const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(selectedCategoryIdState);
 
   useEffect(async () => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_SERVER}/games`, {
-      method: "get",
-    });
-
-    const gamesList = await response.json();
+    const gamesList = await fetchGames();
 
     setGames(gamesList);
     setFilteredGames(gamesList);

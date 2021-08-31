@@ -3,6 +3,7 @@ import { Image, Button, Icon } from "semantic-ui-react";
 import { useRecoilState } from "recoil";
 import { useHistory } from "react-router-dom";
 import { userState } from "../../../common/States";
+import { userLogout, removeUserFromStorage } from "../../../common/Api";
 
 export default function UserInfo() {
   const history = useHistory();
@@ -10,23 +11,12 @@ export default function UserInfo() {
   const [user, setUser] = useRecoilState(userState);
 
   const onLogoutClick = async () => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_SERVER}/logout`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: user.username,
-      }),
-    });
-
-    const responseData = await response.json();
+    const responseData = await userLogout(user.username);
 
     if (responseData.status === "success") {
       setUser(null);
 
-      localStorage.removeItem("user");
+      removeUserFromStorage();
 
       history.push("/login");
     }

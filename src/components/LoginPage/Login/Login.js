@@ -3,6 +3,7 @@ import { Container, Form, Button, Input, Icon } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../common/States";
+import { userLogin, saveUserToStorage } from "../../../common/Api";
 import "./Login.scss";
 
 export default function Login() {
@@ -27,19 +28,7 @@ export default function Login() {
       return;
     }
 
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_SERVER}/login`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-
-    const responseData = await response.json();
+    const responseData = await userLogin(username, password);
 
     if (responseData.status === "fail") {
       alert(responseData.error);
@@ -48,7 +37,7 @@ export default function Login() {
 
       setUser(currentUser);
 
-      localStorage.user = JSON.stringify(currentUser);
+      saveUserToStorage(currentUser);
 
       history.push("/");
     }

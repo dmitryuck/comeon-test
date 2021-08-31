@@ -9,6 +9,7 @@ import {
   filtersState,
 } from "../../../common/States";
 import { applyFilters, concatFilters } from "../../../common/Filters";
+import { fetchCategories } from "../../../common/Api";
 import CategoryItem from "./CategoryItem/CategoryItem";
 
 export default function Categories() {
@@ -19,11 +20,7 @@ export default function Categories() {
   const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(selectedCategoryIdState);
 
   useEffect(async () => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_SERVER}/categories`, {
-      method: "get",
-    });
-
-    const categoriesList = await response.json();
+    const categoriesList = await fetchCategories();
 
     setCategories(categoriesList);
   }, []);
